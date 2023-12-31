@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>History</title>
+    <meta charset="utf-8">
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="/public/jquery.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"> </script>
+    <!-- Link  -->
+    <!-- <script src="/public/js/control.js"></script> -->
+    <script src="/public/js/history.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/history.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="base">IoT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/base">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller/:....">Dasboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Tính năng
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/history">Lịch sử</a></li>
+                            <li><a class="dropdown-item" href="/timer">Hẹn giờ</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Thêm thiết bị</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MyAcount</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Thoát</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- main-body-->
+    <h1 style="color: #68caee;">Lịch sử đo
+        <form class="d-flex" role="search">
+            <input id="Search_History" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" style="width: 30%;margin-left: 70%;">
+            <button id="button_search" class="btn btn-outline-success" type="button" onclick="Search_On_History()">Search</button>
+        </form>
+    </h1>
+    <div id="RTC"></div>
+
+    <div id="wrapper">
+        <div id="left">
+            <div class="boxtitle">Bảng lịch sử đo</div>
+        </div>
+
+        <div id="h-header">
+            <div id="h-id" class="header-content">ID</div>
+            <div id="h-time" class="header-content">Thời gian</div>
+            <div id="h-devicecId" class="header-content">Thiết bị</div>
+            <div id="h-temp" class="header-content">Nhiệt độ</div>
+            <div id="h-humi" class="header-content">Độ ẩm</div>
+            <div id="h-light" class="header-content">Ánh sáng</div>
+            <div id="h-soil" class="header-content">Độ ẩm đất</div>
+            <div id="h-Rssi" class="header-content">Rssi</div>
+            <div id="h-SNR" class="header-content">SNR</div>
+        </div>
+
+        <div id="h-body">
+            <div id="id-content"></div>
+            <div id="time-content"></div>
+            <div id="devicecId-content"></div>
+            <div id="temp-content"></div>
+            <div id="humi-content"></div>
+            <div id="light-content"></div>
+            <div id="soil-content"></div>
+            <div id="Rssi-content"></div>
+            <div id="SNR-content"></div>
+        </div>
+    </div>
+</body>
+</html>

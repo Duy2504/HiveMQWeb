@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+		integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<title>LoRa Web</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="overflow-x: hidden;">
+    <!-- Header -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">IoT</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/controller/:....">Dasboard</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							Tính năng
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="/history">Lịch sử</a></li>
+							<li><a class="dropdown-item" href="/timer">Hẹn giờ</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item" href="#">Thêm thiết bị</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled" aria-disabled="true">Blog</a>
+					</li>
+				</ul>
+			</div>
+            <ul class = "navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MyAcount</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Thoát</a>
+                </li>
+            </ul>
+		</div>
+	</nav>
+
+    <!-- main body -->
+	<!-- Banner - content  -->
+	<div id="carouselExampleDark" class="carousel carousel-dark slide">
+		<div class="carousel-indicators">
+		  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div>
+		<div class="carousel-inner">
+		  <div class="carousel-item active" data-bs-interval="10000">
+			<img src="/public/images/baner/baner1.jpg" class="d-block w-100" alt="..." style="height:400px; opacity: 0.8;">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>Farm 1</h5>
+			  <p>Ứng dụng Iot 2019</p>
+			</div>
+		  </div>
+		  <div class="carousel-item" data-bs-interval="2000">
+			<img src="/public/images/baner/baner2.jpg" class="d-block w-100" alt="..." style="height:400px; opacity: 0.8;">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>Farm 2</h5>
+			  <p>Ứng dụng IoT 2020</p>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<img src="/public/images/baner/baner3.jpg" class="d-block w-100" alt="..." style="height:400px; opacity: 0.8;">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>Farm 3</h5>
+			  <p>Ứng dụng IoT 2021</p>
+			</div>
+		  </div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Next</span>
+		</button>
+	  </div>
+	<!-- main - content -->
+	<div class= "row">
+		<div class = "col-lg-3">
+		  <img class= "thumbnail" src="/public/images/sanpham/LoRa1.png" style="width: 100% ">
+		  <div class="box-element product">
+			<h6 style="text-align: center;"><strong > LoRa Gate 1 </strong></h6>
+	
+			<button class="btn btn-outline-secondary add-btn"> Liên Hệ </button>
+			<a class="btn btn-outline-success" href="#"> Xem </a>
+			<h4 style =" display: inline-block; float: right"><strong> 2.000.000 VND</strong> </h4>
+		  </div>
+		</div>
+		<div class = "col-lg-3">
+		  <img class= "thumbnail" src="/public/images/sanpham/LoRa2.png" style="width: 100% ">
+		  <div class="box-element product">
+			<h6 style="text-align: center;"><strong > LoRa Gate 2 </strong></h6>
+	
+			<button class="btn btn-outline-secondary add-btn"> Liên Hệ </button>
+			<a class="btn btn-outline-success" href="#"> Xem </a>
+			<h4 style =" display: inline-block; float: right"><strong> 2.000.000 VND</strong> </h4>
+		  </div>
+		</div>
+		<div class = "col-lg-3">
+		  <img class= "thumbnail" src="/public/images/sanpham/LoRa3.jpg" style="width: 100% ">
+		  <div class="box-element product ">
+			<h6 style="text-align: center;"><strong > LoRa Gate 3 </strong></h6>
+	
+			<button class="btn btn-outline-secondary add-btn"> Liên Hệ </button>
+			<a class="btn btn-outline-success" href="#"> Xem </a>
+			<h4 style =" display: inline-block; float: right;"><strong> 2.000.000 VND</strong> </h4>
+		  </div>
+		</div>
+		<div class = "col-lg-3">
+		  <img class= "thumbnail" src="/public/images/sanpham/LoRa3.jpg" style="width: 100% ">
+		  <div class="box-element product">
+			<h6 style="text-align: center;"><strong> LoRa Gate 4 </strong></h6>
+	
+			<button class="btn btn-outline-secondary add-btn"> Liên Hệ </button>
+			<a class="btn btn-outline-success" href="#"> Xem </a>
+			<h4 style =" display: inline-block; float: right"><strong> 2.000.000 VND</strong> </h4>
+		  </div>
+		</div>
+	  </div>
+    <!-- footer -->
+	<footer class="container-fluid bg-white text-center p-2" style="position: sticky; bottom: 0;">
+		&copy; 2023@ LeDinhDuy
+	</footer>	
+    <script src="" async defer></script>
+</body>
+</html>

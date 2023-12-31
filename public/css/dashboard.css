@@ -1,0 +1,431 @@
+body {
+  /* margin-left:  5px;
+    margin-right: 5px; */
+  background-color: #25384e;
+  ;
+}
+
+/* .highcharts-figure{
+  width: 50%;
+} */
+.myChart {
+  display: block;
+  min-height: 320px;
+  max-height: 400px;
+  opacity: 0;
+  background-color: antiquewhite;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #68caee;
+  padding-top: 13px;
+  padding-bottom: 10px;
+  /* display: flex; */
+}
+
+.form-container {
+  text-align: end;
+}
+
+.form {
+  float: right;
+  margin-left: 13px;
+  padding-left: 7px;
+  padding-right: 7px;
+  text-decoration: none;
+  color: #8a7c7c;
+  border: 1px solid rgb(234, 20, 241);
+  border-radius: 10px;
+}
+
+.form:hover {
+  cursor: pointer;
+  background-color: rgb(105, 105, 218);
+  color: white;
+  transition: 0.7s;
+}
+
+.main-title {
+  background-color: #182631;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  padding-top: 8px;
+  padding-bottom: 3px;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.main-content {
+  display: flex;
+}
+
+.left-block {
+  width: 70%;
+  border: 1px solid white;
+  border-right: none;
+  background-color: #ffffff;
+}
+
+.current-state {
+  display: flex;
+}
+
+.parameters-display {
+  width: 70%;
+}
+
+.auto {
+  width: 30%;
+  border: 1px solid white;
+}
+.checkboxAuto {
+  position: absolute;
+  width: 15%;
+  height: 226px;
+  opacity: 0;
+}
+#currentSoil {
+  margin: 0%;
+  text-align: center;
+  color: white;
+}
+
+@keyframes bgcolor {
+  0% {
+    background-color: #114264
+  }
+
+  30% {
+    background-color: #8ef557
+  }
+
+  60% {
+    background-color: #5a2502
+  }
+
+  90% {
+    background-color: rgb(133, 30, 47)
+  }
+
+  100% {
+    background-color: #5e209c
+  }
+}
+
+.warning-mode-on {
+  -webkit-animation: bgcolor 4s infinite;
+  animation: bgcolor 2s infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
+
+.right-block {
+  width: 30%;
+  border: 1px solid white;
+  border-left: none;
+  background-color: #25384e;
+}
+
+.element-block {
+  width: 50%;
+  height: 113px;
+  display: flex;
+  border: 1px solid white;
+  border-right: none;
+  text-align: center;
+  position: relative;
+  background-color: #25384e;
+}
+
+.checkbox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+.element-icon {
+  width: 56px;
+  height: 46px;
+  margin-top: 36px;
+  margin-left: 18px;
+}
+
+.soil-icon {
+  width: 60px;
+  height: 45px;
+  margin-top: 36px;
+  margin-left: 38%;
+}
+
+.soil {
+  width: 30%;
+  background-color: #836f6f;
+  border: 1px solid white;
+
+}
+
+.element-soil {
+  text-align: center;
+  color: white;
+  margin-top: 48px;
+}
+
+.element-text {
+  display: flex;
+  margin-left: 10px;
+  margin-top: 46px;
+  color: white;
+}
+
+.element-container {
+  display: flex;
+}
+
+.width100 {
+  width: 100%;
+  height: 161px;
+  border-bottom: 3px solid black;
+}
+
+.center {
+  justify-content: center;
+}
+
+.turn-off {
+  background-color: #25384e;
+}
+
+.turn-on {
+  background-color: rgb(29, 117, 248);
+}
+
+.right5px {
+  margin-right: 5px;
+}
+
+.appliances:hover {
+  cursor: pointer;
+  background-color: rgb(145, 139, 197);
+  transition: 0.5s;
+}
+
+/* Button Auto */
+
+#auto-icon {
+  width: 56px;
+  height: 46px;
+  margin-top: 36px;
+  margin-left: 37%;
+}
+
+.checkboxThreeAuto {
+  width: 94px;
+  height: 39px;
+  background: #3f707a;
+  margin: 41px 60px 0px 40px;
+  border-radius: 50px;
+  position: relative;
+}
+
+.checkboxThreeAuto:before {
+  position: absolute;
+  top: 9px;
+  left: 1px;
+  height: 22px;
+  color: #26ca28;
+  font-size: 6px;
+}
+
+.checkboxThreeAuto:after {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  height: 22px;
+  color: red;
+  font-size: 6px;
+}
+
+.checkboxThreeAuto label {
+  display: block;
+  width: 59px;
+  height: 37px;
+  border-radius: 50px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  left: 1px;
+  background: #e43131;
+}
+
+.checkboxThreeAuto input[type=checkbox]:checked+label {
+  left: 33px;
+  background: #26ca28;
+}
+
+/* Button Đèn */
+.checkboxThreeDen {
+  width: 70px;
+  height: 37px;
+  background: #3f707a;
+  margin: -4px 60px 0px 9px;
+  border-radius: 50px;
+  position: relative;
+}
+
+.checkboxThreeDen:before {
+  position: absolute;
+  top: 9px;
+  left: 1px;
+  height: 22px;
+  color: #26ca28;
+  font-size: 6px;
+}
+
+.checkboxThreeDen:after {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  height: 22px;
+  color: red;
+  font-size: 6px;
+}
+
+.checkboxThreeDen label {
+  display: block;
+  width: 44px;
+  height: 35px;
+  border-radius: 50px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  left: 1px;
+  background: #e43131;
+}
+
+.checkboxThreeDen input[type=checkbox]:checked+label {
+  left: 27px;
+  background: #26ca28;
+}
+
+/* Button Pump */
+.checkboxThreePump {
+  width: 70px;
+  height: 37px;
+  background: #3f707a;
+  margin: -4px 60px 0px 9px;
+  border-radius: 50px;
+  position: relative;
+}
+
+.checkboxThreePump:before {
+  position: absolute;
+  top: 9px;
+  left: 1px;
+  height: 22px;
+  color: #26ca28;
+  font-size: 6px;
+}
+
+.checkboxThreePump:after {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  height: 22px;
+  color: red;
+  font-size: 6px;
+}
+
+.checkboxThreePump label {
+  display: block;
+  width: 44px;
+  height: 35px;
+  border-radius: 50px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  left: 1px;
+  background: #e43131;
+}
+
+.checkboxThreePump input[type=checkbox]:checked+label {
+  left: 27px;
+  background: #26ca28;
+}
+
+/* Button Rem */
+.checkboxThreeRem {
+  width: 94px;
+  height: 39px;
+  background: #40856f;
+  margin: 53px 60px 0px -87px;
+  border-radius: 50px;
+  position: relative;
+}
+
+.checkboxThreeRem:before {
+  position: absolute;
+  top: 9px;
+  left: 1px;
+  height: 22px;
+  color: #26ca28;
+  font-size: 6px;
+}
+
+.checkboxThreeRem:after {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  height: 22px;
+  color: red;
+  font-size: 6px;
+}
+
+.checkboxThreeRem label {
+  display: block;
+  width: 59px;
+  height: 37px;
+  border-radius: 50px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  z-index: 1;
+  left: 1px;
+  background: #e43131;
+}
+
+.checkboxThreeRem input[type=checkbox]:checked+label {
+  left: 33px;
+  background: #26ca28;
+}

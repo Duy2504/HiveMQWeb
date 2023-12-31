@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <!-- HightChar -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script src="/public/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/timeAndWeather.js"> </script>
+
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="/public/css/device.css">
+    <link rel="stylesheet" href="/public/css/hightchart.css">
+    <script src="/public/js/highchart/highcharts.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">IoT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/base">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dasboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Tính năng
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/history">Lịch sử</a></li>
+                            <li><a class="dropdown-item" href="/timer">Hẹn giờ</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Thêm thiết bị</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MyAcount</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Thoát</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- main-body-->
+    <div class="row">
+        <div class="col-1">
+            <div class="container">
+                <div class="sidenav">
+                    <a href="/controller/4402492" class="tab"> Khu vực 1</a>
+                    <a href="/controller/1432308" class="tab"> Khu vực 2</a>
+                    <hr>
+                    <div class="tab" onclick="openAddDeviceModal()">Thêm</div>
+                </div>
+                <div class="content" id="main">
+                    <!-- <h2 style="text-align: center;" id="tile">BẢNG ĐIỀU KHIỂN</h2> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-11">
+            <div class="main-title">
+                BẢNG ĐIỀU KHIỂN THIẾT BỊ
+                <span id="deviceId">
+                    <%= Sensordata.deviceId %>
+                </span>
+            </div>
+
+            <div class="main-content">
+                <div class="left-block">
+                    <div class="current-state">
+                        <div class="parameters-display">
+                            <div class="element-container">
+                                <div class="element-block" style="background-color: #13adc4;">
+                                    <img id="time-icon" class="element-icon" src="/public/images/icon/sun.png" alt="">
+                                    <div class="element-text">
+                                        <p>Time:</p>
+                                        <p id="time" style="margin-left: 10%;"> </p>
+                                        <!-- <p style="margin: 0% 0% 0% 0% ;"> Date:</p> -->
+                                        <p id="date"
+                                            style="width: auto; margin-top: 19%; margin-right: -20%; margin-left: -33%;">
+                                            Date:
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Nhiệt độ -->
+                                <div class="element-block" style="background-color: #ff7e6c;">
+                                    <img class="element-icon" src="/public/images/icon/temprature.png" alt="">
+                                    <div class="element-text">
+                                        <p class="right5px">Nhiệt độ: </p>
+                                        <p id="currentTemp"></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Ánh sáng -->
+                            <div class="element-container">
+                                <div class="element-block" style="background-color: #ffca00">
+                                    <img class="element-icon" src="/public/images/icon/sunny.png" alt="">
+                                    <div class="element-text">
+                                        <p class="right5px">Ánh sáng: </p>
+                                        <p id="currentLight"></p>
+                                    </div>
+                                </div>
+                                <!-- Độ ẩm -->
+                                <div class="element-block" style="background-color: #5c7ee3;">
+                                    <img class="element-icon" src="/public/images/icon/drop.png" alt="">
+                                    <div class="element-text">
+                                        <p class="right5px">Độ ẩm: </p>
+                                        <p id="currentHumi"> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Độ ẩm đất -->
+                        <div class="soil" id="SoilHumi">
+                            <div class="col">
+                                <div class="row">
+                                    <p class="element-soil">Độ ẩm đất</p>
+                                    <p id="currentSoil"></p>
+                                    <img class="soil-icon" src="/public/images/icon/soil.png" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Auto Mode -->
+                        <div class="auto" id="autoSection" style="background-color: violet">
+                            <input class="checkboxAuto" type="checkbox" name="" onclick="controlAuto()" id="auto">
+                            <div style=" display: flex; margin-top: 60px;">
+                                <img id="auto-icon" src="/public/images/icon/auto-mode-off.png" alt="">
+                                
+                                <!-- <p style="    
+                            margin-top: 47px;
+                            margin-left: 10px;
+                            color: white;">Auto</p> -->
+                                <!-- Button click -->
+                                <!-- <div style="display: flex;">
+                                    <div class="checkboxThreeAuto">
+                                        <input type="checkbox" id="checkboxThreeInput_auto" onclick="on_off_auto()"
+                                            name="" style="margin: 14px 0px 0px 44px" />
+                                        <label for="checkboxThreeInput_auto"></label>
+                                    </div>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chart -->
+                    <figure class="highcharts-figure">
+                        <div id="container"> </div>
+                    </figure>
+
+                </div>
+                <!-- device -->
+                <div class="right-block">
+                    <div class="device-control">
+                        <div class="main-title">
+                            THIẾT BỊ
+                        </div>
+                        <div class="element-container">
+                            <div id="device-light" class="element-block appliances turn-off">
+                                <img id="light-icon" class="element-icon" src="/public/images/icon/light-off.png"
+                                    alt="">
+                                <input class="checkbox" type="checkbox" name="" onclick="controlLight()"
+                                    id="deviceLight">
+                                <div class="element-text">
+                                    <p id="text-light">Đèn</p>
+                                    <!-- Button click -->
+                                    <!-- <div style="display: flex;">
+                                <div class="checkboxThreeDen">
+                                    <input type="checkbox" id="checkboxThreeInput_den" onclick="on_off_den()" name=""
+                                        style="margin: 14px 0px 0px 3px" />
+                                    <label for="checkboxThreeInput_den"></label>
+                                </div>
+                            </div> -->
+
+                                </div>
+                            </div>
+                            <div id="device-pump" class="element-block appliances turn-off">
+                                <img id="pump-icon" class="element-icon" src="/public/images/icon/pump-off.png" alt="">
+                                <input class="checkbox" type="checkbox" name="" onclick="controlPump()" id="devicePump">
+                                <div class="element-text">
+                                    <p id="text-pump">Bơm</p>
+                                    <!-- Button click -->
+                                    <!-- <div style="display: flex;">
+                                <div class="checkboxThreePump">
+                                    <input type="checkbox" id="checkboxThreeInput_Pump" onclick="on_off_Pump()" name=""
+                                        style="margin: 14px 0px 0px 3px" />
+                                    <label for="checkboxThreeInput_Pump"></label>
+                                </div>
+                            </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="element-container">
+                            <div id="rem-container" class="element-block appliances width100 center turn-off">
+                                <img id="rem-icon" class="element-icon" src="/public/images/icon/rem-mo.png" alt="">
+                                <input class="checkbox" type="checkbox" name="" onclick="controlRem()" id="deviceRem">
+                                <div class="element-text">
+                                    <p id="text-rem">Rèm</p>
+                                    <!-- Button click -->
+                                    <!-- <div style="display: flex;">
+                                <div class="checkboxThreeRem">
+                                    <input type="checkbox" id="checkboxThreeInput_rem" onclick="on_off_rem()" name="" />
+                                    <label for="checkboxThreeInput_rem"></label>
+                                </div>
+                            </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Tinhieu">
+                        <div class="main-title">
+                            TÍN HIỆU
+                        </div>
+                        <!-- Rssi -->
+                        <div class="element-container">
+                            <div id="RSSI" class="element-block" style="background-Color: rgb(150, 196, 208)">
+                                <img id="RSSI-icon" class="element-icon" src="/public/images/icon/RSSI.png" alt="">
+                                <div class="element-text">
+                                    <p class="right5px">RSSI: </p>
+                                    <p id="currentRssi"></p>
+                                </div>
+                            </div>
+                            <!-- Pin -->
+                            <div id="Pin" class="element-block" style="background-Color: rgb(103, 231, 101)">
+                                <img id="SNR-icon" class="element-icon" src="/public/images/icon/equalizer.png"
+                                    alt="">
+                                <div class="element-text">
+                                    <p class="right5px">SNR: </p>
+                                    <p id="currentSNR"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thời tiết ngày mai -->
+                        <div class="element-container">
+                            <div id="weather" class="element-block appliances width100 center "
+                                style="background-Color: rgb(207, 130, 130);">
+                                <img class="element-icon" src="/public/images/icon/weather.gif" alt="">
+                                <p style="margin: 5% 0px 0px 3% ; width: 10%;"> Thời tiết ngày mai</p>
+                                <div id="weatherForecast" class="element-text" style="color: black;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        updateTime();
+        refreshChart();
+    </script>
+    <script src="/public/js/control.js"> </script>
+
+</body>
+
+</html>
