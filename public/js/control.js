@@ -280,6 +280,12 @@ const chart = Highcharts.chart("container", {
   title: {
     text: "Sensor Data",
   },
+  // xAxis: {
+  //   type: "datetime",
+  //   title: {
+  //     text: "Time",
+  //   },
+  // },
   xAxis: {
     type: "datetime",
     title: {
@@ -311,7 +317,7 @@ const chart = Highcharts.chart("container", {
     {
       name: "Temperature",
       marker: {
-        Symbol: "square",
+        Symbol: "cross",
       },
       data: [0],
     },
@@ -325,14 +331,14 @@ const chart = Highcharts.chart("container", {
     {
       name: "Light",
       marker: {
-        symbol: "diamond",
+        symbol: "circle",
       },
       data: [0],
     },
     {
       name: "Soil",
       marker: {
-        symbol: "diamond",
+        symbol: "triangle",
       },
       data: [0],
     },

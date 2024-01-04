@@ -60,9 +60,6 @@ app.get("/timer", function (req, res) {
 app.get("/dashboard", function (req, res) {
   res.render("control");
 });
-app.get("/control", function (req, res) {
-  res.render("control");
-});
 
 app.get("/controller/:id", async (req, res) => {
   const deviceId = req.params.id;
@@ -71,12 +68,12 @@ app.get("/controller/:id", async (req, res) => {
     temp: null,
     humid: null,
     light: null,
-    soil: null
+    soil: null,
   };
   const query = `SELECT * FROM datasensors WHERE DeviceId = ? ORDER BY created_at DESC LIMIT 1`;
-  con.query(query, [deviceId], function(error, results) {
-    console.log(results && results.length > 0)
-    if (results && results.length > 0){
+  con.query(query, [deviceId], function (error, results) {
+    console.log(results && results.length > 0);
+    if (results && results.length > 0) {
       Sensordata = {
         deviceId: deviceId,
         temp: results[0].temp,
@@ -84,7 +81,7 @@ app.get("/controller/:id", async (req, res) => {
         light: results[0].light,
         soil: results[0].soil,
         Rssi: results[0].Rssi,
-        SNR: results[0].SNR
+        SNR: results[0].SNR,
       };
     }
     console.log(Sensordata);
@@ -102,13 +99,18 @@ app.get("/login", function (req, res) {
 app.get("/signup", function (req, res) {
   res.render("signup");
 });
-app.get("/get-5-last-data/:id",function(req, res) {
+app.get("/get-5-last-data/:id", function (req, res) {
   // query 5 last data by deviceId from datasensors
   const deviceId = req.params.id;
   const query = `SELECT * FROM datasensors WHERE DeviceId = ? ORDER BY created_at DESC LIMIT 10`;
-  con.query(query, [deviceId], function(error, results) {
+  con.query(query, [deviceId], function (error, results) {
     if (error) {
-      res.status(500).json({ error: 'Internal Server Error', message: JSON.stringify(error) });
+      res
+        .status(500)
+        .json({
+          error: "Internal Server Error",
+          message: JSON.stringify(error),
+        });
     } else {
       res.json(results);
     }
@@ -219,18 +221,18 @@ io.on("connection", function (socket) {
   });
   socket.on("xacthuc", (data) => {
     console.log("Xacthuc:", data);
-    const sqlLogin = 'SELECT * FROM user WHERE user = ? AND password = ?';
+    const sqlLogin = "SELECT * FROM user WHERE user = ? AND password = ?";
     const values = [data.username, data.password];
     con.query(sqlLogin, values, (err, results) => {
       if (err) {
-        console.error('Error querying MySQL:', err);
+        console.error("Error querying MySQL:", err);
         return;
       }
       if (results.length > 0) {
-        io.emit('checkLogin',1);
+        io.emit("checkLogin", 1);
       } else {
-        console.log('Invalid username or password');
-        io.emit('checkLogin',0);
+        console.log("Invalid username or password");
+        io.emit("checkLogin", 0);
       }
     });
   });
