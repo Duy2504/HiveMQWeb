@@ -126,7 +126,7 @@
                                     <img class="element-icon" src="/public/images/icon/temprature.png" alt="">
                                     <div class="element-text">
                                         <p class="right5px">Nhiệt độ: </p>
-                                        <p id="currentTemp"></p>
+                                        <p id="currentTemp"><%= Sensordata.temp %> °C</p>
                                     </div>
                                 </div>
 
@@ -137,7 +137,7 @@
                                     <img class="element-icon" src="/public/images/icon/sunny.png" alt="">
                                     <div class="element-text">
                                         <p class="right5px">Ánh sáng: </p>
-                                        <p id="currentLight"></p>
+                                        <p id="currentLight"><%= Sensordata.light %> %</p>
                                     </div>
                                 </div>
                                 <!-- Độ ẩm -->
@@ -145,7 +145,7 @@
                                     <img class="element-icon" src="/public/images/icon/drop.png" alt="">
                                     <div class="element-text">
                                         <p class="right5px">Độ ẩm: </p>
-                                        <p id="currentHumi"> </p>
+                                        <p id="currentHumi"> <%= Sensordata.humid %> %</p>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                             <div class="col">
                                 <div class="row">
                                     <p class="element-soil">Độ ẩm đất</p>
-                                    <p id="currentSoil"></p>
+                                    <p id="currentSoil"><%= Sensordata.soil %> %</p>
                                     <img class="soil-icon" src="/public/images/icon/soil.png" alt="">
                                 </div>
 
@@ -259,7 +259,7 @@
                                 <img id="RSSI-icon" class="element-icon" src="/public/images/icon/RSSI.png" alt="">
                                 <div class="element-text">
                                     <p class="right5px">RSSI: </p>
-                                    <p id="currentRssi"></p>
+                                    <p id="currentRssi"><%= Sensordata.Rssi %> dB</p>
                                 </div>
                             </div>
                             <!-- Pin -->
@@ -268,7 +268,7 @@
                                     alt="">
                                 <div class="element-text">
                                     <p class="right5px">SNR: </p>
-                                    <p id="currentSNR"></p>
+                                    <p id="currentSNR"><%= Sensordata.SNR %></p>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +290,7 @@
 
     <script>
         updateTime();
-        refreshChart();
+        // refreshChart();
     </script>
     <script src="/public/js/control.js"> </script>
 

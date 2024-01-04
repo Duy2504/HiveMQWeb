@@ -160,7 +160,6 @@ function controlAuto() {
 }
 
 function controlLight() {
-  var stateLight;
   var checkBox = document.getElementById("deviceLight");
   if (checkBox.checked) {
     if (!statusLight) {
@@ -171,9 +170,7 @@ function controlLight() {
         document.getElementById("device-light").style.backgroundColor =
           "#ffef99";
         document.getElementById("text-light").style.color = "black";
-        // socket.emit("light_change", deviceId + ",1");
-        stateLight = 1;
-        socket.emit("light_change", {deviceId, stateLight});
+        socket.emit("light_change", deviceId + ",1");
         statusLight = true;
       } else {
         checkBox.checked = false;
@@ -185,9 +182,7 @@ function controlLight() {
           "/public/images/icon/light-off.png";
         document.getElementById("device-light").style.backgroundColor = null;
         document.getElementById("text-light").style.color = null;
-        // socket.emit("light_change", deviceId + ",0");
-        stateLight = 0;
-        socket.emit("light_change", {deviceId, stateLight});
+        socket.emit("light_change", deviceId + ",0");
         statusLight = false;
       } else {
         checkBox.checked = true;
@@ -258,17 +253,17 @@ function controlRem() {
   }
 }
 
-socket.on("chart_"+deviceId, function (data_received) {
-  data_received.forEach(function (value) {
-    console.log(value.temp);
-    console.log(value.humid);
-    // Thêm điểm dữ liệu mới vào series
-    chart.series[0].addPoint([Date.now(), item.temp], true, true);
-    chart.series[1].addPoint([Date.now(), item.humid], true, true);
-    chart.series[2].addPoint([Date.now(), item.light], true, true);
-    chart.series[3].addPoint([Date.now(), item.soil], true, true);
-  });
-});
+// socket.on("chart_"+deviceId, function (data_received) {
+//   data_received.forEach(function (value) {
+//     console.log(value.temp);
+//     console.log(value.humid);
+//     // Thêm điểm dữ liệu mới vào series
+//     chart.series[0].addPoint([Date.now(), item.temp], true, true);
+//     chart.series[1].addPoint([Date.now(), item.humid], true, true);
+//     chart.series[2].addPoint([Date.now(), item.light], true, true);
+//     chart.series[3].addPoint([Date.now(), item.soil], true, true);
+//   });
+// });
 
 
 Highcharts.setOptions({
@@ -278,9 +273,7 @@ Highcharts.setOptions({
 });
 //thiết lập chart ban đầu
 const chart = Highcharts.chart("container", {
-  // time: {
-  // timezone: 'Asia/Ho_Chi_Minh'
-  // },
+  
   chart: {
     type: "spline",
   },
@@ -320,31 +313,45 @@ const chart = Highcharts.chart("container", {
       marker: {
         Symbol: "square",
       },
-      data: [0,0,0,0,0],
+      data: [0],
     },
     {
       name: "Humidity",
       marker: {
         symbol: "diamond",
       },
-      data: [0,0,0,0,0],
+      data: [0],
     },
     {
       name: "Light",
       marker: {
         symbol: "diamond",
       },
-      data: [0,0,0,0,0],
+      data: [0],
     },
     {
       name: "Soil",
       marker: {
         symbol: "diamond",
       },
-      data: [0,0,0,0,0],
+      data: [0],
     },
   ],
 });
 
-
+function fetchDataAndUpdateChart(deviceId) {
+  fetch(`/get-5-last-data/${deviceId}`)
+    .then(response => response.json())
+    .then(data => {
+      // Update the chart series with the fetched data
+      chart.series[0].setData(data.map(item => [new Date(item.created_at).getTime(), item.temp]));
+      chart.series[1].setData(data.map(item => [new Date(item.created_at).getTime(), item.humid]));
+      chart.series[2].setData(data.map(item => [new Date(item.created_at).getTime(), item.light]));
+      chart.series[3].setData(data.map(item => [new Date(item.created_at).getTime(), item.soil]));
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}
+fetchDataAndUpdateChart(deviceId);
 

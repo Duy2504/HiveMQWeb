@@ -68,31 +68,30 @@ app.get("/controller/:id", async (req, res) => {
   const deviceId = req.params.id;
   Sensordata = {
     deviceId: deviceId,
+    temp: null,
+    humid: null,
+    light: null,
+    soil: null
   };
-  res.render("control", { Sensordata });
-  // var sqlchart = `SELECT * FROM datasensors WHERE DeviceId = ${con.escape(
-  //   deviceId
-  // )} ORDER BY created_at DESC LIMIT 1`;
-  // con.query(sqlchart, function (err, result, fields) {
-  //   if (err) throw err;
-  //   var chart = [];
-  //   result.forEach(function (value) {
-  //     var m_time = value.created_at.toString().slice(4, 24);
-  //     chart.unshift({
-  //       id: value.id,
-  //       time: m_time,
-  //       deviceId: value.deviceId,
-  //       temp: value.temp,
-  //       humid: value.humid,
-  //       light: value.light,
-  //       soil: value.soil,
-  //       Rssi: value.Rssi,
-  //       Pin: value.Pin,
-  //     });
-  //   });
-  //   console.log(chart);
-  //   io.emit("AutoMode_" + deviceId, chart);
-  // });
+  const query = `SELECT * FROM datasensors WHERE DeviceId = ? ORDER BY created_at DESC LIMIT 1`;
+  con.query(query, [deviceId], function(error, results) {
+    console.log(results && results.length > 0)
+    if (results && results.length > 0){
+      Sensordata = {
+        deviceId: deviceId,
+        temp: results[0].temp,
+        humid: results[0].humid,
+        light: results[0].light,
+        soil: results[0].soil,
+        Rssi: results[0].Rssi,
+        SNR: results[0].SNR
+      };
+    }
+    console.log(Sensordata);
+    res.render("control", { Sensordata });
+  });
+  // console.log(Sensordata);
+  // res.render("control", { Sensordata });
 });
 app.get("/history", function (req, res) {
   res.render("history");
@@ -103,7 +102,19 @@ app.get("/login", function (req, res) {
 app.get("/signup", function (req, res) {
   res.render("signup");
 });
-
+app.get("/get-5-last-data/:id",function(req, res) {
+  // query 5 last data by deviceId from datasensors
+  const deviceId = req.params.id;
+  const query = `SELECT * FROM datasensors WHERE DeviceId = ? ORDER BY created_at DESC LIMIT 10`;
+  con.query(query, [deviceId], function(error, results) {
+    if (error) {
+      res.status(500).json({ error: 'Internal Server Error', message: JSON.stringify(error) });
+    } else {
+      res.json(results);
+    }
+  });
+  // return json respone data
+});
 // client.on("connect", function () {
 //   console.log("mqtt connected");
 //   client.subscribe("sensor");
